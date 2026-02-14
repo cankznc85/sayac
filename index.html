@@ -3,234 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Özel Küçük Bir Sürpriz ❤️</title>
+    <title>Sana Özel: Zamanın Ritmi ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --murdum-soft: #5d2e46;
-            --love-pink: #ff4d6d;
-            --bg-cream: #fff5f7;
+            --murdum-gradient: linear-gradient(135deg, #430d27 0%, #630d35 100%);
+            --rose-gold: #e29578;
+            --soft-pink: #ffddd2;
+            --glass-bg: rgba(255, 255, 255, 0.03);
         }
 
         body {
-            background-color: var(--bg-cream);
-            font-family: 'Comfortaa', cursive;
+            background: #1a0510;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            perspective: 1000px;
         }
 
-        /* Arka planda uçuşan kalpler */
-        .heart-float {
+        /* Arka Plan Hareketli Işıklar */
+        .ambient-light {
             position: absolute;
-            color: var(--love-pink);
-            opacity: 0.3;
-            animation: floatUp 8s linear infinite;
-            z-index: 0;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 13, 53, 0.3) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 1;
+            animation: pulse 10s infinite alternate;
         }
 
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 0.8; }
         }
 
-        .main-card {
-            background: white;
-            padding: 40px;
-            border-radius: 50px;
-            width: 380px;
-            text-align: center;
-            box-shadow: 0 30px 60px rgba(93, 46, 70, 0.15);
-            border: 6px solid #ffe5ec;
-            z-index: 10;
+        .container {
             position: relative;
+            z-index: 10;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 60px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
         }
 
-        h1 {
-            font-family: 'Pacifico', cursive;
-            color: var(--love-pink);
-            font-size: 1.8rem;
-            margin-bottom: 5px;
+        h1 { font-family: 'Dancing Script', crossorigin; font-size: 2.5rem; color: var(--rose-gold); margin: 0; }
+        .subtitle { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; opacity: 0.6; margin-bottom: 30px; }
+
+        /* Büyük Yüzde Göstergesi */
+        .percent-wrapper {
+            position: relative;
+            margin-bottom: 40px;
         }
 
-        .big-percent {
-            font-size: 5rem;
-            font-weight: 700;
-            color: var(--murdum-soft);
+        .percent-text {
+            font-size: 6rem;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff, var(--rose-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin: 0;
-            letter-spacing: -2px;
         }
 
-        .percent-label {
-            font-size: 0.8rem;
-            color: #b5838d;
-            display: block;
-            margin-bottom: 20px;
+        /* Zaman Kartları */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .live-timer {
-            background: #fff0f3;
-            padding: 15px;
-            border-radius: 25px;
-            margin: 20px 0;
-            border: 1px dashed var(--love-pink);
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .timer-unit {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--murdum-soft);
-            margin: 5px 0;
-        }
+        .card-label { font-size: 0.6rem; text-transform: uppercase; color: var(--rose-gold); font-weight: 700; margin-bottom: 10px; display: block; }
+        .card-val { font-size: 0.9rem; font-weight: 400; line-height: 1.5; color: #fff; }
 
-        .progress-container {
+        /* İlerleme Çubuğu */
+        .bar-container {
             width: 100%;
-            height: 12px;
-            background: #f0f0f0;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
             border-radius: 10px;
+            margin-bottom: 40px;
             overflow: hidden;
-            margin-bottom: 25px;
         }
 
-        .progress-bar {
+        .bar-fill {
             height: 100%;
-            background: linear-gradient(90deg, #ff4d6d, #ff85a1);
+            background: linear-gradient(90deg, #630d35, #ff4d6d);
             width: 0%;
-            transition: width 1s ease-in-out;
+            transition: width 0.5s;
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.4);
         }
 
-        /* Etkileşimli Not Kutusu */
-        .love-note-box {
-            background: var(--love-pink);
-            color: white;
-            padding: 15px;
-            border-radius: 20px;
+        /* İnteraktif Not Alanı */
+        .note-btn {
+            background: transparent;
+            border: 2px solid var(--rose-gold);
+            color: var(--rose-gold);
+            padding: 15px 30px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            user-select: none;
-            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+            transition: all 0.3s;
+            text-transform: uppercase;
         }
 
-        .love-note-box:active { transform: scale(0.95); }
+        .note-btn:hover { background: var(--rose-gold); color: #fff; transform: scale(1.05); }
 
-        .note-text { font-size: 0.85rem; font-weight: 700; }
-        .note-hint { font-size: 0.6rem; display: block; margin-top: 5px; opacity: 0.8; }
-
+        #note-display {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--soft-pink);
+            min-height: 40px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="main-card">
-        <h1>Birtanem... 🌸</h1>
-        <p style="font-size: 0.7rem; color: #b5838d;">24 Ocak - 24 Şubat Yolculuğumuz</p>
+    <div class="ambient-light"></div>
 
-        <span class="big-percent" id="percVal">%00</span>
-        <span class="percent-label">Seni Sevme Oranım: %∞</span>
+    <div class="container">
+        <h1>Birtanem...</h1>
+        <span class="subtitle">Zamanın Kalp Atışı</span>
 
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+        <div class="percent-wrapper">
+            <h2 class="percent-text" id="perc">%00.0</h2>
+            <div class="bar-container">
+                <div class="bar-fill" id="bar"></div>
+            </div>
         </div>
 
-        <div class="live-timer">
-            <span class="timer-unit" style="font-size: 0.6rem; color: #ff4d6d;">🌹 SANA KAVUŞMAMIZA (YENİ DÖNGÜYE):</span>
-            <span class="timer-unit" id="timeLeft">Hesaplanıyor...</span>
+        <div class="grid">
+            <div class="card">
+                <span class="card-label">Geride Kalan 🕊️</span>
+                <span class="card-val" id="passed">...</span>
+            </div>
+            <div class="card">
+                <span class="card-label">Sıradaki Adım ✨</span>
+                <span class="card-val" id="left">...</span>
+            </div>
         </div>
 
-        <div class="love-note-box" onclick="changeNote()">
-            <span id="noteDisplay" class="note-text">Buraya tıkla, sana bir notum var! 💌</span>
-            <span class="note-hint">(Her tıkladığında değişir)</span>
-        </div>
-
-        <p style="font-size: 0.6rem; margin-top: 20px; color: #b5838d;">Seninle geçen her saniye çok kıymetli. ✨</p>
+        <button class="note-btn" onclick="getNote()">Senin İçin Bir Notum Var</button>
+        <p id="note-display">Dokunmanı bekliyorum...</p>
     </div>
 
     <script>
-        // Zaman Ayarları
         const START = new Date("2026-01-24T00:00:00");
         const END = new Date("2026-02-24T00:00:00");
-        
-        // Tatlı Notlar Listesi
-        const notes = [
-            "Dünyanın en tatlı uykucusu, seni çok seviyorum! 🧸",
-            "Bugün biraz yorgun hissedersen bana yaslanabilirsin. ❤️",
-            "Sana en sevdiğin çikolatayı almak için sabırsızlanıyorum! 🍫",
-            "Senin o gülüşün için dünyayı bile durdururum. 🌍",
-            "Hırçın olsan da, sakin olsan da her halinle benimsin. ✨",
-            "Bu sayaç bittiğinde sana kocaman sarılacağım! 🤗",
-            "Sen benim hayatımdaki en güzel şubat hediyesisin. 🌸",
-            "Nazını da çekerim, kahrını da; sen yeter ki yanımda ol. 💕"
+        const DURATION = END - START;
+
+        const messages = [
+            "Bugün dünyanın en güzel kadını olduğunu hatırladın mı? ❤️",
+            "Zaman akıp gidiyor ama sana olan sevgim sabit kalıyor. ✨",
+            "Sana en sevdiğin tatlıları hazırlamak için sabırsızlanıyorum! 🍫",
+            "Hangi ruh halinde olursan ol, her zaman senin yanındayım. 🌸",
+            "Bu sayaç sadece bir rakam, benim aşkım ise sonsuz. ♾️",
+            "Gülüşün, benim karanlık dünyamı aydınlatan tek ışık. 🌹",
+            "Canın ne çekiyorsa söyle, hemen kapına gelsin! 🍦",
+            "Seninle geçen her saniye, hayatımın en güzel hediyesi. 🎁"
         ];
 
         function update() {
             const now = new Date();
-            const total = END - START;
             const elapsed = now - START;
             const remaining = END - now;
 
-            // Yüzde (Küsuratsız tatlı durur)
-            let p = Math.floor((elapsed / total) * 100);
+            // Hassas Yüzde
+            let p = (elapsed / DURATION) * 100;
             p = Math.max(0, Math.min(100, p));
-            document.getElementById('percVal').innerText = "%" + p;
-            document.getElementById('progressBar').style.width = p + "%";
+            document.getElementById('perc').innerText = "%" + p.toFixed(1);
+            document.getElementById('bar').style.width = p + "%";
 
-            // Kalan Zaman Detayı
-            if (remaining > 0) {
-                const d = Math.floor(remaining / 86400000);
-                const h = Math.floor((remaining % 86400000) / 3600000);
-                const m = Math.floor((remaining % 3600000) / 60000);
-                const s = Math.floor((remaining % 60000) / 1000);
-                document.getElementById('timeLeft').innerText = `${d} gün, ${h} saat, ${m} dk, ${s} sn`;
-            } else {
-                document.getElementById('timeLeft').innerText = "Vakit geldi, prenses modu aktif! 👑";
+            // Zaman Formatlama
+            function fmt(ms) {
+                if(ms < 0) return "Süreç Tamamlandı!";
+                const d = Math.floor(ms / 86400000);
+                const h = Math.floor((ms % 86400000) / 3600000);
+                const m = Math.floor((ms % 3600000) / 60000);
+                const s = Math.floor((ms % 60000) / 1000);
+                return `${d}g ${h}sa ${m}dk ${s}sn`;
             }
+
+            document.getElementById('passed').innerText = fmt(elapsed);
+            document.getElementById('left').innerText = fmt(remaining);
         }
 
-        // Not değiştirme fonksiyonu
-        function changeNote() {
-            const display = document.getElementById('noteDisplay');
-            const randomNote = notes[Math.floor(Math.random() * notes.length)];
-            display.innerText = randomNote;
+        function getNote() {
+            const display = document.getElementById('note-display');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerText = messages[Math.floor(Math.random() * messages.length)];
+                display.style.opacity = 1;
+            }, 300);
             
-            // Tıklayınca küçük bir konfeti patlat
             confetti({
-                particleCount: 30,
-                spread: 50,
+                particleCount: 40,
+                spread: 60,
                 origin: { y: 0.8 },
-                colors: ['#ff4d6d', '#ff85a1']
+                colors: ['#e29578', '#630d35', '#ffffff']
             });
-        }
-
-        // Arka plan kalpleri oluşturma
-        function createHearts() {
-            for(let i=0; i<15; i++) {
-                let heart = document.createElement('div');
-                heart.className = 'heart-float';
-                heart.innerText = '❤';
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDelay = Math.random() * 8 + "s";
-                heart.style.fontSize = (Math.random() * 20 + 10) + "px";
-                document.body.appendChild(heart);
-            }
         }
 
         setInterval(update, 1000);
         update();
-        createHearts();
         
-        // İlk açılış şovu
         window.onload = () => {
             confetti({
-                particleCount: 150,
+                particleCount: 200,
                 spread: 100,
                 origin: { y: 0.6 },
-                colors: ['#ff4d6d', '#5d2e46', '#ffffff']
+                colors: ['#630d35', '#e29578', '#ffffff']
             });
         };
     </script>
