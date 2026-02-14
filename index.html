@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canlı Döngü Takibi</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --murdum: #3a061d;
+            --murdum-vibrant: #7b1040;
+            --neon: #ff0055;
+        }
+
+        body {
+            background: radial-gradient(circle, #250412 0%, #0c0206 100%);
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace; /* Yazılımcı fontu */
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .dashboard {
+            background: rgba(58, 6, 29, 0.4);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .main-percent {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--neon);
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 0, 85, 0.4);
+        }
+
+        .live-label {
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8e1b3a;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .data-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px 20px;
+            border-radius: 15px;
+            border-left: 3px solid var(--neon);
+        }
+
+        .data-val {
+            display: block;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+
+        .data-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        #status-msg {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #ffb3c1;
+            min-height: 20px;
+        }
+
+        .progress-mini {
+            height: 4px;
+            background: rgba(255,255,255,0.05);
+            margin: 20px 0;
+            border-radius: 2px;
+        }
+
+        .progress-inner {
+            height: 100%;
+            background: var(--neon);
+            width: 0%;
+            box-shadow: 0 0 10px var(--neon);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <span class="live-label">Canlı Veri Analizi</span>
+        <div class="main-percent" id="perc">%0.000</div>
+        
+        <div class="progress-mini">
+            <div class="progress-inner" id="bar"></div>
+        </div>
+
+        <div class="grid">
+            <div class="data-box">
+                <span class="data-label">Geçen Süre (24 Ocak'tan)</span>
+                <span class="data-val" id="timePassed">0g 0s 0dak 0sn</span>
+            </div>
+            <div class="data-box">
+                <span class="data-label">Kalan Süre (24 Şubat'a)</span>
+                <span class="data-val" id="timeLeft">0g 0s 0dak 0sn</span>
+            </div>
+        </div>
+
+        <div id="status-msg">Sistem Aktif...</div>
+    </div>
+
+    <script>
+        const start = new Date("2026-01-24T00:00:00");
+        const end = new Date("2026-02-24T00:00:00");
+        const totalMs = end - start;
+
+        function update() {
+            const now = new Date();
+            const elapsedMs = now - start;
+            const remainingMs = end - now;
+
+            // Yüzde Hesaplama (4 haneli küsurat)
+            let percentage = (elapsedMs / totalMs) * 100;
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+            document.getElementById('perc').innerText = "%" + percentage.toFixed(3);
+            document.getElementById('bar').style.width = percentage + "%";
+
+            // Zaman Formatlama Fonksiyonu
+            function formatTime(ms) {
+                if (ms < 0) return "Süre Doldu";
+                const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const mins = Math.floor((ms % (1000 * 60 * 60)) / (1000 * 60));
+                const secs = Math.floor((ms % (1000 * 60)) / 1000);
+                return `${days}g ${hours}s ${mins}dk ${secs}sn`;
+            }
+
+            document.getElementById('timePassed').innerText = formatTime(elapsedMs);
+            document.getElementById('timeLeft').innerText = formatTime(remainingMs);
+
+            // Dinamik Mesaj
+            const msg = document.getElementById('status-msg');
+            if (percentage >= 95) msg.innerText = "🚨 KRİTİK SEVİYE: Her an başlayabilir!";
+            else if (percentage >= 75) msg.innerText = "⚠️ Yaklaşıyor, sabır modunu aktif et.";
+            else msg.innerText = "✨ Güvenli bölge, sistem stabil.";
+        }
+
+        // Havai Fişek
+        function fire() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#4a0e2e', '#ff0055', '#ab1d5d']
+            });
+        }
+
+        setInterval(update, 1000); // Her saniye güncelle
+        update();
+        window.onload = fire;
+    </script>
+</body>
+  </html>
+  
