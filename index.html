@@ -3,23 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Döngü Takip Sistemi</title>
+    <title>Sana Özel Takip Çizelgem ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f0208;
-            --primary: #6b0f32;
-            --accent: #ff2d75;
-            --card-bg: rgba(45, 10, 26, 0.6);
-            --text-main: #ffffff;
-            --text-sub: #ffb3c1;
+            --soft-murdum: #5d2e46;
+            --sweet-pink: #ff85a1;
+            --bg-pastel: #fff0f3;
         }
 
         body {
-            background: radial-gradient(circle at center, #2d0a1a 0%, var(--bg-color) 100%);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-pastel);
+            color: var(--soft-murdum);
+            font-family: 'Comfortaa', cursive;
             margin: 0;
             height: 100vh;
             display: flex;
@@ -28,196 +25,173 @@
             overflow: hidden;
         }
 
-        .main-container {
-            position: relative;
-            background: var(--card-bg);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 50px;
+        .main-card {
+            background: white;
+            padding: 40px;
             border-radius: 40px;
-            width: 420px;
+            width: 360px;
             text-align: center;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            z-index: 10;
+            box-shadow: 0 20px 40px rgba(93, 46, 70, 0.1);
+            border: 4px solid #f8d7da;
+            position: relative;
         }
 
-        .header-title {
-            font-size: 0.8rem;
+        h1 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--soft-murdum);
+        }
+
+        .big-percent {
+            font-size: 4.5rem;
             font-weight: 700;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .percentage-display {
-            font-size: 5rem;
-            font-weight: 900;
+            color: var(--sweet-pink);
             margin: 10px 0;
-            background: linear-gradient(180deg, #fff 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-variant-numeric: tabular-nums;
+            display: block;
         }
 
-        .progress-bar-container {
+        .progress-container {
             width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin: 30px 0;
-            overflow: hidden;
+            height: 15px;
+            background: #fdf0f0;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 2px solid #feeef1;
         }
 
-        .progress-bar-fill {
+        .progress-bar {
             height: 100%;
-            background: var(--accent);
+            background: linear-gradient(90deg, #ff85a1, #f8ad9d);
+            border-radius: 20px;
             width: 0%;
-            box-shadow: 0 0 20px var(--accent);
-            transition: width 0.3s ease;
+            transition: width 1s ease-out;
         }
 
-        .data-grid {
+        .info-grid {
             display: grid;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
-        .data-card {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px 25px;
+        .info-box {
+            background: #fff8f9;
+            padding: 15px;
             border-radius: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 2px solid var(--accent);
+            border: 1px solid #feeef1;
         }
 
-        .data-label {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--text-sub);
-            text-transform: uppercase;
-            text-align: left;
+        .info-title {
+            font-size: 0.75rem;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #b5838d;
         }
 
-        .data-value {
-            font-size: 1rem;
+        .info-val {
+            font-size: 0.95rem;
             font-weight: 700;
-            font-family: 'Inter', sans-serif;
-            color: #fff;
         }
 
-        .status-badge {
+        #special-msg {
             margin-top: 30px;
-            padding: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #d63384;
+            background: #fff0f3;
+            padding: 15px;
             border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            background: rgba(255, 45, 117, 0.1);
-            color: var(--text-sub);
-            border: 1px solid rgba(255, 45, 117, 0.2);
         }
 
-        /* Arka plan dekorasyonu */
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
-            z-index: 1;
-            border-radius: 50%;
+        .heart {
+            color: #ff4d6d;
+            font-size: 1.5rem;
+            display: block;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="glow" style="top: -100px; left: -100px;"></div>
-    <div class="glow" style="bottom: -100px; right: -100px;"></div>
-
-    <div class="main-container">
-        <div class="header-title">Döngü Analiz Paneli</div>
+    <div class="main-card">
+        <h1>Birlikte Bekliyoruz 🌸</h1>
         
-        <div class="percentage-display" id="percentage">%00.00</div>
+        <span class="big-percent" id="perc">%00</span>
 
-        <div class="progress-bar-container">
-            <div class="progress-bar-fill" id="bar"></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="bar"></div>
         </div>
 
-        <div class="data-grid">
-            <div class="data-card">
-                <span class="data-label">Tamamlanan Zaman<br>(24 Ocak'tan beri)</span>
-                <span class="data-value" id="passed">0g 0s 0dk 0sn</span>
+        <div class="info-grid">
+            <div class="info-box">
+                <span class="info-title">24 Ocak'tan Beri 🕊️</span>
+                <span class="info-val" id="passed">...</span>
             </div>
-            <div class="data-card" style="border-left-color: #fff;">
-                <span class="data-label">Tahmini Kalan Süre<br>(24 Şubat'a kadar)</span>
-                <span class="data-value" id="left">0g 0s 0dk 0sn</span>
+            <div class="info-box">
+                <span class="info-title">24 Şubat'a Kalan 💕</span>
+                <span class="info-val" id="left">...</span>
             </div>
         </div>
 
-        <div class="status-badge" id="status-msg">
-            Sistem verileri saniye hassasiyetinde işleniyor.
-        </div>
+        <div id="special-msg">Yükleniyor prenses...</div>
+        
+        <span class="heart">♥</span>
     </div>
 
     <script>
-        const START_DATE = new Date("2026-01-24T00:00:00");
-        const END_DATE = new Date("2026-02-24T00:00:00");
-        const TOTAL_DURATION = END_DATE - START_DATE;
+        const START = new Date("2026-01-24T00:00:00");
+        const END = new Date("2026-02-24T00:00:00");
+        const TOTAL = END - START;
 
-        function formatDuration(ms) {
-            if (ms < 0) return "Süre tamamlandı";
-            const days = Math.floor(ms / 86400000);
-            const hours = Math.floor((ms % 86400000) / 3600000);
-            const minutes = Math.floor((ms % 3600000) / 60000);
-            const seconds = Math.floor((ms % 60000) / 1000);
-            return `${days}g ${hours}s ${minutes}dk ${seconds}sn`;
-        }
-
-        function updateUI() {
+        function update() {
             const now = new Date();
-            const elapsed = now - START_DATE;
-            const remaining = END_DATE - now;
+            const elapsed = now - START;
+            const remaining = END - now;
 
-            // Yüzde hesaplama
-            let perc = (elapsed / TOTAL_DURATION) * 100;
-            perc = Math.max(0, Math.min(100, perc));
-            
-            document.getElementById('percentage').innerText = "%" + perc.toFixed(2);
-            document.getElementById('bar').style.width = perc + "%";
-            
-            document.getElementById('passed').innerText = formatDuration(elapsed);
-            document.getElementById('left').innerText = formatDuration(remaining);
+            // Yüzde
+            let p = (elapsed / TOTAL) * 100;
+            p = Math.max(0, Math.min(100, p));
+            document.getElementById('perc').innerText = "%" + Math.floor(p);
+            document.getElementById('bar').style.width = p + "%";
 
-            // Dinamik Durum Mesajları
-            const statusMsg = document.getElementById('status-msg');
-            if (perc >= 95) {
-                statusMsg.innerText = "Yüksek Öncelikli Dönem: Hassasiyet artışı gözlemlenebilir.";
-            } else if (perc >= 75) {
-                statusMsg.innerText = "Hazırlık Aşaması: Enerji seviyelerinde değişim beklenebilir.";
-            } else if (perc >= 50) {
-                statusMsg.innerText = "Döngü Ortası: Sistem kararlı durumda ilerliyor.";
+            // Zaman Formatlama
+            function fmt(ms) {
+                if(ms < 0) return "Vakit geldi tatlım!";
+                const d = Math.floor(ms / 86400000);
+                const h = Math.floor((ms % 86400000) / 3600000);
+                const m = Math.floor((ms % 3600000) / 60000);
+                const s = Math.floor((ms % 60000) / 1000);
+                return `${d}gün ${h}saat ${m}dk ${s}sn`;
+            }
+
+            document.getElementById('passed').innerText = fmt(elapsed);
+            document.getElementById('left').innerText = fmt(remaining);
+
+            // Sempatik Mesajlar
+            const msg = document.getElementById('special-msg');
+            if (p >= 90) {
+                msg.innerText = "🚨 Modun her an değişebilir, ben her an yanındayım ve çikolataların hazır!";
+            } else if (p >= 70) {
+                msg.innerText = "🍬 Birazcık naz yapma vaktin yaklaşıyor sanki, ne dersin?";
+            } else if (p >= 40) {
+                msg.innerText = "☀️ Şimdilik her şey harika! Tadını çıkaralım.";
             } else {
-                statusMsg.innerText = "Stabil Dönem: Mevcut durum korumaya uygun.";
+                msg.innerText = "🌸 Musmutlu bir dönemdeyiz, enerjine kurban!";
             }
         }
 
-        function triggerConfetti() {
-            const colors = ['#6b0f32', '#ff2d75', '#ffffff'];
+        function celebrate() {
             confetti({
-                particleCount: 150,
+                particleCount: 100,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: colors,
-                disableForReducedMotion: true
+                colors: ['#ff85a1', '#f8ad9d', '#ff4d6d']
             });
         }
 
-        // Başlatma
-        setInterval(updateUI, 1000);
-        updateUI();
-        window.onload = triggerConfetti;
+        setInterval(update, 1000);
+        update();
+        window.onload = celebrate;
     </script>
 </body>
 </html>
