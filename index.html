@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Özel Takip Çizelgem ❤️</title>
+    <title>Sana Özel Küçük Bir Sürpriz ❤️</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-murdum: #5d2e46;
-            --sweet-pink: #ff85a1;
-            --bg-pastel: #fff0f3;
+            --murdum-soft: #5d2e46;
+            --love-pink: #ff4d6d;
+            --bg-cream: #fff5f7;
         }
 
         body {
-            background-color: var(--bg-pastel);
-            color: var(--soft-murdum);
+            background-color: var(--bg-cream);
             font-family: 'Comfortaa', cursive;
             margin: 0;
             height: 100vh;
@@ -23,175 +22,217 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            perspective: 1000px;
+        }
+
+        /* Arka planda uçuşan kalpler */
+        .heart-float {
+            position: absolute;
+            color: var(--love-pink);
+            opacity: 0.3;
+            animation: floatUp 8s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         .main-card {
             background: white;
             padding: 40px;
-            border-radius: 40px;
-            width: 360px;
+            border-radius: 50px;
+            width: 380px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(93, 46, 70, 0.1);
-            border: 4px solid #f8d7da;
+            box-shadow: 0 30px 60px rgba(93, 46, 70, 0.15);
+            border: 6px solid #ffe5ec;
+            z-index: 10;
             position: relative;
         }
 
         h1 {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            color: var(--soft-murdum);
+            font-family: 'Pacifico', cursive;
+            color: var(--love-pink);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
 
         .big-percent {
-            font-size: 4.5rem;
+            font-size: 5rem;
             font-weight: 700;
-            color: var(--sweet-pink);
-            margin: 10px 0;
+            color: var(--murdum-soft);
+            margin: 0;
+            letter-spacing: -2px;
+        }
+
+        .percent-label {
+            font-size: 0.8rem;
+            color: #b5838d;
             display: block;
+            margin-bottom: 20px;
+        }
+
+        .live-timer {
+            background: #fff0f3;
+            padding: 15px;
+            border-radius: 25px;
+            margin: 20px 0;
+            border: 1px dashed var(--love-pink);
+        }
+
+        .timer-unit {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--murdum-soft);
+            margin: 5px 0;
         }
 
         .progress-container {
             width: 100%;
-            height: 15px;
-            background: #fdf0f0;
-            border-radius: 20px;
-            margin: 25px 0;
-            border: 2px solid #feeef1;
+            height: 12px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 25px;
         }
 
         .progress-bar {
             height: 100%;
-            background: linear-gradient(90deg, #ff85a1, #f8ad9d);
-            border-radius: 20px;
+            background: linear-gradient(90deg, #ff4d6d, #ff85a1);
             width: 0%;
-            transition: width 1s ease-out;
+            transition: width 1s ease-in-out;
         }
 
-        .info-grid {
-            display: grid;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .info-box {
-            background: #fff8f9;
+        /* Etkileşimli Not Kutusu */
+        .love-note-box {
+            background: var(--love-pink);
+            color: white;
             padding: 15px;
             border-radius: 20px;
-            border: 1px solid #feeef1;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            user-select: none;
+            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
         }
 
-        .info-title {
-            font-size: 0.75rem;
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #b5838d;
-        }
+        .love-note-box:active { transform: scale(0.95); }
 
-        .info-val {
-            font-size: 0.95rem;
-            font-weight: 700;
-        }
+        .note-text { font-size: 0.85rem; font-weight: 700; }
+        .note-hint { font-size: 0.6rem; display: block; margin-top: 5px; opacity: 0.8; }
 
-        #special-msg {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #d63384;
-            background: #fff0f3;
-            padding: 15px;
-            border-radius: 15px;
-        }
-
-        .heart {
-            color: #ff4d6d;
-            font-size: 1.5rem;
-            display: block;
-            margin-top: 10px;
-        }
     </style>
 </head>
 <body>
 
     <div class="main-card">
-        <h1>Birlikte Bekliyoruz 🌸</h1>
-        
-        <span class="big-percent" id="perc">%00</span>
+        <h1>Birtanem... 🌸</h1>
+        <p style="font-size: 0.7rem; color: #b5838d;">24 Ocak - 24 Şubat Yolculuğumuz</p>
+
+        <span class="big-percent" id="percVal">%00</span>
+        <span class="percent-label">Seni Sevme Oranım: %∞</span>
 
         <div class="progress-container">
-            <div class="progress-bar" id="bar"></div>
+            <div class="progress-bar" id="progressBar"></div>
         </div>
 
-        <div class="info-grid">
-            <div class="info-box">
-                <span class="info-title">24 Ocak'tan Beri 🕊️</span>
-                <span class="info-val" id="passed">...</span>
-            </div>
-            <div class="info-box">
-                <span class="info-title">24 Şubat'a Kalan 💕</span>
-                <span class="info-val" id="left">...</span>
-            </div>
+        <div class="live-timer">
+            <span class="timer-unit" style="font-size: 0.6rem; color: #ff4d6d;">🌹 SANA KAVUŞMAMIZA (YENİ DÖNGÜYE):</span>
+            <span class="timer-unit" id="timeLeft">Hesaplanıyor...</span>
         </div>
 
-        <div id="special-msg">Yükleniyor prenses...</div>
-        
-        <span class="heart">♥</span>
+        <div class="love-note-box" onclick="changeNote()">
+            <span id="noteDisplay" class="note-text">Buraya tıkla, sana bir notum var! 💌</span>
+            <span class="note-hint">(Her tıkladığında değişir)</span>
+        </div>
+
+        <p style="font-size: 0.6rem; margin-top: 20px; color: #b5838d;">Seninle geçen her saniye çok kıymetli. ✨</p>
     </div>
 
     <script>
+        // Zaman Ayarları
         const START = new Date("2026-01-24T00:00:00");
         const END = new Date("2026-02-24T00:00:00");
-        const TOTAL = END - START;
+        
+        // Tatlı Notlar Listesi
+        const notes = [
+            "Dünyanın en tatlı uykucusu, seni çok seviyorum! 🧸",
+            "Bugün biraz yorgun hissedersen bana yaslanabilirsin. ❤️",
+            "Sana en sevdiğin çikolatayı almak için sabırsızlanıyorum! 🍫",
+            "Senin o gülüşün için dünyayı bile durdururum. 🌍",
+            "Hırçın olsan da, sakin olsan da her halinle benimsin. ✨",
+            "Bu sayaç bittiğinde sana kocaman sarılacağım! 🤗",
+            "Sen benim hayatımdaki en güzel şubat hediyesisin. 🌸",
+            "Nazını da çekerim, kahrını da; sen yeter ki yanımda ol. 💕"
+        ];
 
         function update() {
             const now = new Date();
+            const total = END - START;
             const elapsed = now - START;
             const remaining = END - now;
 
-            // Yüzde
-            let p = (elapsed / TOTAL) * 100;
+            // Yüzde (Küsuratsız tatlı durur)
+            let p = Math.floor((elapsed / total) * 100);
             p = Math.max(0, Math.min(100, p));
-            document.getElementById('perc').innerText = "%" + Math.floor(p);
-            document.getElementById('bar').style.width = p + "%";
+            document.getElementById('percVal').innerText = "%" + p;
+            document.getElementById('progressBar').style.width = p + "%";
 
-            // Zaman Formatlama
-            function fmt(ms) {
-                if(ms < 0) return "Vakit geldi tatlım!";
-                const d = Math.floor(ms / 86400000);
-                const h = Math.floor((ms % 86400000) / 3600000);
-                const m = Math.floor((ms % 3600000) / 60000);
-                const s = Math.floor((ms % 60000) / 1000);
-                return `${d}gün ${h}saat ${m}dk ${s}sn`;
-            }
-
-            document.getElementById('passed').innerText = fmt(elapsed);
-            document.getElementById('left').innerText = fmt(remaining);
-
-            // Sempatik Mesajlar
-            const msg = document.getElementById('special-msg');
-            if (p >= 90) {
-                msg.innerText = "🚨 Modun her an değişebilir, ben her an yanındayım ve çikolataların hazır!";
-            } else if (p >= 70) {
-                msg.innerText = "🍬 Birazcık naz yapma vaktin yaklaşıyor sanki, ne dersin?";
-            } else if (p >= 40) {
-                msg.innerText = "☀️ Şimdilik her şey harika! Tadını çıkaralım.";
+            // Kalan Zaman Detayı
+            if (remaining > 0) {
+                const d = Math.floor(remaining / 86400000);
+                const h = Math.floor((remaining % 86400000) / 3600000);
+                const m = Math.floor((remaining % 3600000) / 60000);
+                const s = Math.floor((remaining % 60000) / 1000);
+                document.getElementById('timeLeft').innerText = `${d} gün, ${h} saat, ${m} dk, ${s} sn`;
             } else {
-                msg.innerText = "🌸 Musmutlu bir dönemdeyiz, enerjine kurban!";
+                document.getElementById('timeLeft').innerText = "Vakit geldi, prenses modu aktif! 👑";
             }
         }
 
-        function celebrate() {
+        // Not değiştirme fonksiyonu
+        function changeNote() {
+            const display = document.getElementById('noteDisplay');
+            const randomNote = notes[Math.floor(Math.random() * notes.length)];
+            display.innerText = randomNote;
+            
+            // Tıklayınca küçük bir konfeti patlat
             confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#ff85a1', '#f8ad9d', '#ff4d6d']
+                particleCount: 30,
+                spread: 50,
+                origin: { y: 0.8 },
+                colors: ['#ff4d6d', '#ff85a1']
             });
+        }
+
+        // Arka plan kalpleri oluşturma
+        function createHearts() {
+            for(let i=0; i<15; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-float';
+                heart.innerText = '❤';
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDelay = Math.random() * 8 + "s";
+                heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+                document.body.appendChild(heart);
+            }
         }
 
         setInterval(update, 1000);
         update();
-        window.onload = celebrate;
+        createHearts();
+        
+        // İlk açılış şovu
+        window.onload = () => {
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#ff4d6d', '#5d2e46', '#ffffff']
+            });
+        };
     </script>
 </body>
 </html>
